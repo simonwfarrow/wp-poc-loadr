@@ -36,7 +36,7 @@ spec:
               value: "clearing-payment-t"
       containers:
         - name: wp-poc-loadr
-          image: simonwfarrow/wp-poc-loadr:1.0.1
+          image: simonwfarrow/wp-poc-loadr:1.0.2
           imagePullPolicy: Always
           env:
             - name: TOPIC

@@ -27,8 +27,8 @@ public class Loadr implements Runnable {
             for (int i = 1; i <= numEvents; i++) {
 
                 UUID id = UUID.randomUUID();
-                json = json.replaceAll("ID", id.toString());
-                producer.send(new ProducerRecord<String, String>(topicName, id.toString(), json));
+                String payload = json.replaceAll("ID", id.toString());
+                producer.send(new ProducerRecord<String, String>(topicName, id.toString(), payload));
             }
 
             producer.flush();
