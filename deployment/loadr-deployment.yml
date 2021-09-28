@@ -41,13 +41,13 @@ spec:
           command: ["java -jar /srv/loadr-1.0.0.jar $TOPIC $CONCURRENCY $PAYLOAD $NUMEVENTS"]
           env:
             - name: TOPIC
-              value: 'clearing-payment-t'
+              value: "clearing-payment-t"
             - name: CONCURRENCY
-              value: 10
+              value: "10"
             - name: PAYLOAD
-              value: '{\"version\":1,\"@version\":\"1\",\"type\":\"business_events\",\"@timestamp\":\"2021-09-27T16:23:34.253Z\",\"id\":\"ID\",\"category\":\"event\",\"name\":\"payment_cleared\",\"payload\":{\"interchangeCostCurrency\":\"GBP\",\"interchangeCostAmount\":\"1\",\"scheme\":\"VISA\",\"id\":\"ID\",\"value\":\"10000\",\"currency\":\"GBP\",\"merchantId\":\"861edc23-ae0e-4a1d-84c8-c6aa98fb284e\",\"schemeFeeCurrency\":\"GBP\",\"schemeFeeAmount\":\"2\"},\"occurred_at\":\"2021-09-27T16:23:34.160Z\",\"status\":\"priced\",\"aged\":\"false\",\"tags\":[]}'
+              value: "{\"version\":1,\"@version\":\"1\",\"type\":\"business_events\",\"@timestamp\":\"2021-09-27T16:23:34.253Z\",\"id\":\"ID\",\"category\":\"event\",\"name\":\"payment_cleared\",\"payload\":{\"interchangeCostCurrency\":\"GBP\",\"interchangeCostAmount\":\"1\",\"scheme\":\"VISA\",\"id\":\"ID\",\"value\":\"10000\",\"currency\":\"GBP\",\"merchantId\":\"861edc23-ae0e-4a1d-84c8-c6aa98fb284e\",\"schemeFeeCurrency\":\"GBP\",\"schemeFeeAmount\":\"2\"},\"occurred_at\":\"2021-09-27T16:23:34.160Z\",\"status\":\"priced\",\"aged\":\"false\",\"tags\":[]}"
             - name: NUMEVENTS
-              value: 10000
+              value: "10000"
             - name: KAFKA_HOST
               valueFrom:
                 configMapKeyRef:
