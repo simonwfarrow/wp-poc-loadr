@@ -38,7 +38,7 @@ spec:
         - name: wp-poc-loadr
           image: simonwfarrow/wp-poc-loadr:latest
           imagePullPolicy: IfNotPresent
-          command: ["java -jar /srv/loadr-1.0.0.jar $TOPIC $CONCURRENCY $PAYLOAD $NUMEVENTS"]
+          command: ["/bin/sh", "java -jar /srv/loadr-1.0.0.jar $TOPIC $CONCURRENCY $PAYLOAD $NUMEVENTS"]
           env:
             - name: TOPIC
               value: "clearing-payment-t"
