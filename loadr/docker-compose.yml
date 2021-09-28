@@ -1,0 +1,18 @@
+version: '2'
+services:
+  wp-poc-loadr:
+    image: wp-poc-loadr:latest
+    environment:
+      TOPIC: ${TOPIC}
+      CONCURRENCY: ${CONCURRENCY}
+      PAYLOAD: ${PAYLOAD}
+      NUMEVENTS: ${NUMEVENTS}
+      KAFKA_HOST: ${KAFKA_HOST}
+      KAFKA_PORT: ${KAFKA_PORT}
+    command: java -jar /srv/loadr-1.0.0.jar $TOPIC $CONCURRENCY $PAYLOAD $NUMEVENTS
+    container_name: wp-poc-loadr
+
+networks:
+  default:
+    external:
+      name: poc-wp

@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wp-poc-loadr
+  labels:
+    app.wp.poc.loadr/name: wp-poc-loadr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.wp.poc.loadr/name: wp-poc-loadr
+  template:
+    metadata:
+      labels:
+        app.wp.poc.loadr/name: wp-poc-loadr
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      initContainers:
+        - name: kafka-topic-setup
+          image: rhorv/kafka-adm:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "/tmp/kafka_2.13-2.8.0/bin/kafka-topics.sh --create --if-not-exists --topic $${TOPIC_NAME} --bootstrap-server $${KAFKA_HOST}:$${KAFKA_PORT}" ]
+          env:
+            - name: KAFKA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: host
+            - name: KAFKA_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: port
+            - name: TOPIC_NAME
+              value: "clearing-payment-t"
+      containers:
+        - name: wp-poc-loadr
+          image: rhorv/wp-poc:8d68f0e3351c299fc1290ede20e865604ff9e3d8
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "/srv/run_clearing.sh"]
+          env:
+            - name: PG_CLEARING_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: clearing-db-config
+                  key: host
+            - name: PG_CLEARING_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: clearing-db-config
+                  key: port
+            - name: PG_CLEARING_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: clearing-db-config
+                  key: db
+            - name: PG_CLEARING_USER
+              valueFrom:
+                secretKeyRef:
+                  name: clearing-db-creds
+                  key: user
+            - name: PG_CLEARING_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: clearing-db-creds
+                  key: pass
+            - name: KAFKA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: host
+            - name: KAFKA_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: port
+            - name: KAFKA_CLEARING_EXTERNAL_TOPIC_NAME
+              value: "clearing-payment"
+            - name: KAFKA_CLEARING_INTERNAL_TOPIC_NAME
+              value: "clearing-internal"
