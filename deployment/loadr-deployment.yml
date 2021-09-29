@@ -20,7 +20,7 @@ spec:
         - name: kafka-topic-setup
           image: rhorv/kafka-adm:latest
           imagePullPolicy: IfNotPresent
-          command: ["sh", "-c", "/tmp/kafka_2.13-2.8.0/bin/kafka-topics.sh --create --partitions 4 --replication-factor 3 --if-not-exists --topic $${TOPIC_NAME} --bootstrap-server $${KAFKA_HOST}:$${KAFKA_PORT}" ]
+          command: ["sh", "-c", "/tmp/kafka_2.13-2.8.0/bin/kafka-topics.sh --create --partitions 6 --replication-factor 3 --if-not-exists --topic $${TOPIC_NAME} --bootstrap-server $${KAFKA_HOST}:$${KAFKA_PORT}" ]
           env:
             - name: KAFKA_HOST
               valueFrom:
