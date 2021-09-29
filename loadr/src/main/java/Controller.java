@@ -49,6 +49,15 @@ public class Controller {
             long end = System.currentTimeMillis();
             long totalTime = end-start;
             System.out.println("Completed in " + totalTime/1000 + " seconds");
+            while (true) {
+                //endless loop to keep container alive so kubernetes doesnt restart it
+                try {
+                    Thread.sleep(30000);
+                    System.out.print(".");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
