@@ -42,11 +42,11 @@ spec:
             - name: TOPIC
               value: "clearing-payment-t"
             - name: CONCURRENCY
-              value: "2"
+              value: "1"
             - name: PAYLOAD
               value: "{\"version\":1,\"@version\":\"1\",\"type\":\"business_events\",\"@timestamp\":\"TIMESTAMP\",\"id\":\"ID\",\"category\":\"event\",\"name\":\"payment_cleared\",\"payload\":{\"interchangeCostCurrency\":\"GBP\",\"interchangeCostAmount\":\"1\",\"scheme\":\"VISA\",\"id\":\"ID\",\"value\":\"10000\",\"currency\":\"GBP\",\"merchantId\":\"861edc23-ae0e-4a1d-84c8-c6aa98fb284e\",\"schemeFeeCurrency\":\"GBP\",\"schemeFeeAmount\":\"2\"},\"occurred_at\":\"TIMESTAMP\"}"
             - name: NUMEVENTS
-              value: "2000000"
+              value: "1"
             - name: KAFKA_HOST
               valueFrom:
                 configMapKeyRef:
